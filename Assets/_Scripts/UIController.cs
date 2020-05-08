@@ -22,6 +22,8 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Text score = null;
     private float count = 0;
+
+    private bool isStarted = false;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -40,8 +42,11 @@ public class UIController : MonoBehaviour
         {
             SwitchLeftButton();
             disableFirstScreenHUD();
-            SceneController._instance.Player = SceneController.player.playing;
-           
+            if (isStarted == false)
+            {
+                SceneController._instance.Player = SceneController.player.playing;
+                isStarted = true;
+            }
         }
     }
 
@@ -51,7 +56,11 @@ public class UIController : MonoBehaviour
         {
             SwitchRightButton();
             disableFirstScreenHUD();
-            SceneController._instance.Player = SceneController.player.playing;
+            if (isStarted == false)
+            {
+                SceneController._instance.Player = SceneController.player.playing;
+                isStarted = true;
+            }
         }
     }
 
