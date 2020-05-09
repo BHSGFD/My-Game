@@ -7,6 +7,7 @@ public delegate void SwitchButtonHandler();
 
 public class UIController : MonoBehaviour
 {
+    #region declaration
     public event SwitchButtonHandler SwitchLeftButton;
     public event SwitchButtonHandler SwitchRightButton;
     [SerializeField]
@@ -24,7 +25,11 @@ public class UIController : MonoBehaviour
     private float count = 0;
 
     private bool isStarted = false;
-    // Start is called before the first frame update
+
+    #endregion
+
+    #region unity methods
+
     void OnEnable()
     {
         instance = this;
@@ -36,11 +41,15 @@ public class UIController : MonoBehaviour
         
     }
 
+    #endregion
+
     public void clickLeft()
     {
         if (PlayerController._instance != null)
         {
+            // invoke player move event
             SwitchLeftButton();
+            //starting game
             disableFirstScreenHUD();
             if (isStarted == false)
             {
@@ -54,7 +63,9 @@ public class UIController : MonoBehaviour
     {
         if (PlayerController._instance != null)
         {
+            // invoke player move event
             SwitchRightButton();
+            //starting game
             disableFirstScreenHUD();
             if (isStarted == false)
             {
@@ -63,6 +74,8 @@ public class UIController : MonoBehaviour
             }
         }
     }
+
+    #region UI Methods
 
     private void disableFirstScreenHUD(){
         Image.SetActive(false);
@@ -88,5 +101,5 @@ public class UIController : MonoBehaviour
         score.text = text.text;
     }
 
-
+    #endregion
 }

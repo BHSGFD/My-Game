@@ -8,7 +8,7 @@ public class ControllPointController : MonoBehaviour
    
     void Start()
     {
-       
+       //subscribe
         UIController._instance.SwitchLeftButton += LeftSideSwap;
         UIController._instance.SwitchRightButton += RightSideSwap;
        

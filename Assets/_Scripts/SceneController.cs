@@ -5,24 +5,35 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    #region declaration
     public enum player { waiting, playing, destroyed };
 
     public player Player;
+
+
     public static SceneController instance;
 
     public static SceneController _instance => instance;
 
     [SerializeField]
     private CosmicScriptableObjects[] objects = null;
+
+
     private float count = 0;
+
+    #endregion
+
+
+
+    #region unity methods
     private void OnEnable()
-   
-     {
+
+    {
         instance = this;
     }
 
 
-private void Start()
+    private void Start()
     {
 
         Player = player.waiting;
@@ -31,6 +42,7 @@ private void Start()
 
     private void FixedUpdate()
     {
+        //spawning enemies
         if (Player == player.playing)
         {
             if (objects != null && count >= 80)
@@ -46,16 +58,29 @@ private void Start()
             }
             else count++; ;
         }
-        if(Player == player.destroyed)
+        //open score screen
+        if (Player == player.destroyed)
         {
 
             UIController._instance.EnableEndScreenHUD();
             UIController._instance.Changescore();
-            if (Input.GetMouseButtonDown(0)) { SceneManager.LoadScene(1); } ;
+
         }
     }
+
+    #endregion
+
+
+    public void startNewScene()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+
+
+
+}
 
   
 
 
-}

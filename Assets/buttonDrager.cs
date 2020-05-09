@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class buttonDrager : MonoBehaviour
 {
+    #region declaration
     private enum SizeVector {add, remove }
 
     SizeVector sizeVector = SizeVector.add;
@@ -15,20 +16,18 @@ public class buttonDrager : MonoBehaviour
     private float y = 1;
     private float min_x = 0.7f;
     private float max_x = 1f;
+
+
     [SerializeField]
-    private float speed;
+    private float speed = 0;
 
-    //  private float x= 700f;
-    //  private float y = 140f;
-    //
+    #endregion
 
-    //
-    //  private Text text;
-
+    #region unity methods
     private void Start()
     {
         recttransform = gameObject.GetComponent<RectTransform>();
-   //     text = gameObject.GetComponentInChildren<Text>();
+
         
     }
     void FixedUpdate()
@@ -48,10 +47,12 @@ public class buttonDrager : MonoBehaviour
             y -= 0.01f;
         }
        else sizeVector = SizeVector.add;
-      //  recttransform.sizeDelta = new Vector2(900 * x, 170 * y);
+
+
+       //change scale
         recttransform.localScale = new Vector2(x*speed, y*speed);
     }
+    #endregion
 
-  
 }
 

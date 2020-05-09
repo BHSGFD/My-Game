@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    #region declaration
     [SerializeField]
     public float speed;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    #endregion
+
+    #region unity methods
 
     void FixedUpdate()
     {
+        //move enemy
         if (SceneController._instance.Player == SceneController.player.playing)
         transform.position = new Vector3(transform.position.x - speed, transform.position.y, transform.position.z);
 
@@ -24,8 +24,11 @@ public class EnemyController : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //destroy player
         DoOnEnter(collision);
     }
+
+    #endregion
 
     public virtual void DoOnEnter(Collider2D collision)
 
@@ -33,6 +36,7 @@ public class EnemyController : MonoBehaviour
         PlayerController._instance.GetAnimator().SetBool("IsDead", true);
         SceneController._instance.Player = SceneController.player.waiting;
         StartCoroutine(wait(collision));
+      
         
     }
 
@@ -41,6 +45,7 @@ public class EnemyController : MonoBehaviour
        
         yield return new WaitForSeconds(2);
         Destroy(collision.gameObject);
+       
     }
 
 }
